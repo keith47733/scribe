@@ -2,17 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
-import 'user_auth_screen/create_account_form.dart';
-import 'user_auth_screen/login_form.dart';
+import 'user_auth_screen/create_scribe_form.dart';
+import 'user_auth_screen/login_scribe_form.dart';
 
-class UserAuthScreen extends StatefulWidget {
-  const UserAuthScreen({super.key});
+class ScribeAuthScreen extends StatefulWidget {
+  const ScribeAuthScreen({super.key});
 
   @override
-  State<UserAuthScreen> createState() => _UserAuthScreenState();
+  State<ScribeAuthScreen> createState() => _ScribeAuthScreenState();
 }
 
-class _UserAuthScreenState extends State<UserAuthScreen> {
+class _ScribeAuthScreenState extends State<ScribeAuthScreen> {
   bool _isLogin = true;
 
   @override
@@ -23,7 +23,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _header(context),
-          _isLogin ? const LoginForm() : const CreateAccountForm(),
+          _isLogin ? const LoginScribeForm() : const CreateScribeForm(),
           const SizedBox(height: SPACING),
           _formTextButton(context),
           const SizedBox(height: SPACING),

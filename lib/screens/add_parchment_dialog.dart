@@ -38,7 +38,7 @@ class _AddParchmentDialogState extends State<AddParchmentDialog> {
       await FirebaseFirestore.instance.collection('parchments').add(
             Parchment(
               parchment: '',
-              userId: FirebaseAuth.instance.currentUser!.uid,
+              scribeId: FirebaseAuth.instance.currentUser!.uid,
               author: 'Keith',
               created: Timestamp.fromDate(DateTime.now()),
               photoUrls: 'photo url',

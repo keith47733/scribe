@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import '../../constants/constants.dart';
 import '../../models/scribe.dart';
 
-class UserAvater extends StatefulWidget {
-  const UserAvater({super.key});
+class ScribeAvatar extends StatefulWidget {
+  const ScribeAvatar({super.key});
 
   @override
-  State<UserAvater> createState() => _UserAvaterState();
+  State<ScribeAvatar> createState() => _ScribeAvatarState();
 }
 
-class _UserAvaterState extends State<UserAvater> {
+class _ScribeAvatarState extends State<ScribeAvatar> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
-            .collection('users')
+            .collection('scribes')
             .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
             .snapshots(),
         builder: (context, snapshot) {
@@ -27,7 +27,7 @@ class _UserAvaterState extends State<UserAvater> {
                   color: Theme.of(context).colorScheme.inversePrimary),
             );
           }
-          Scribe currUser = Scribe.fromDocument(snapshot.data!.docs[0]);
+          Scribe currScribe = Scribe.fromDocument(snapshot.data!.docs[0]);
           // return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           //     stream: FirebaseFirestore.instance.collection('users').snapshots(),
           //     builder: (context, snapshot) {
@@ -56,9 +56,9 @@ class _UserAvaterState extends State<UserAvater> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // const SizedBox(height: SPACING / 4),
-                    _avatar(currUser.avatarUrl),
+                    _avatar(currScribe.avatarUrl),
                     // const SizedBox(height: SPACING / 8),
-                    _userName(currUser.displayName),
+                    _scribeName(currScribe.displayName),
                     // const SizedBox(height: SPACING / 4),
                   ],
                 ),
@@ -80,7 +80,7 @@ class _UserAvaterState extends State<UserAvater> {
     );
   }
 
-  Widget _userName(displayName) {
+  Widget _scribeName(displayName) {
     return Text(
       displayName,
       style: Theme.of(context).textTheme.bodySmall!.copyWith(

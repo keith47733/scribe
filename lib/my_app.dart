@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/constants.dart';
-import 'screens/user_auth_screen.dart';
+import 'screens/getting_started_screen.dart';
+import 'screens/scribe_auth_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,14 +19,14 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
-      title: 'scribe',
+      title: 'Grimoire',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
       ),
-      home: const UserAuthScreen(),
-      // home: const GettingStartedScreen(),
+      // home: const ScribeAuthScreen(),
+      home: const GettingStartedScreen(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
-import 'user_auth_screen.dart';
+import 'scribe_auth_screen.dart';
 
 class GettingStartedScreen extends StatelessWidget {
   const GettingStartedScreen({super.key});
@@ -9,7 +9,7 @@ class GettingStartedScreen extends StatelessWidget {
   void _gotoLoginScreen(context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => const UserAuthScreen(),
+        builder: (ctx) => const ScribeAuthScreen(),
       ),
     );
   }
@@ -29,9 +29,9 @@ class GettingStartedScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _title(context),
-                const SizedBox(height: SPACING),
+                // const SizedBox(height: SPACING / 2),
                 _tagLine(context),
-                const SizedBox(height: SPACING * 2),
+                const SizedBox(height: SPACING),
                 _titleImage(context, size),
                 const SizedBox(height: SPACING * 2),
                 _getStartedButton(context),
@@ -45,7 +45,7 @@ class GettingStartedScreen extends StatelessWidget {
 
   Widget _title(context) {
     return Text(
-      'Scribe',
+      'Grimoire',
       style: Theme.of(context).textTheme.headlineLarge!.copyWith(
             color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
@@ -62,9 +62,12 @@ class GettingStartedScreen extends StatelessWidget {
   }
 
   Widget _titleImage(context, size) {
-    return Image.asset(
-      'assets/images/scribe.png',
-      height: size.height * 0.33,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(RADIUS * 3),
+      child: Image.asset(
+        'assets/images/getting_started.jpg',
+        height: size.height * 0.33,
+      ),
     );
   }
 

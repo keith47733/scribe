@@ -2,20 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../../services/user_services.dart';
+import '../../services/scribe_services.dart';
 import '../home_screen.dart';
 import 'auth_input_decoration.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({
+class LoginScribeForm extends StatefulWidget {
+  const LoginScribeForm({
     super.key,
   });
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<LoginScribeForm> createState() => _LoginScribeFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _LoginScribeFormState extends State<LoginScribeForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -50,10 +50,10 @@ class _LoginFormState extends State<LoginForm> {
       }
 
       UserCredential auth;
-      final userEmail = _emailController.text.trim();
-      final userPassword = _passwordController.text.trim();
+      final scribeEmail = _emailController.text.trim();
+      final scribePassword = _passwordController.text.trim();
 
-      auth = await UserServices().loginUser(userEmail, userPassword);
+      auth = await ScribeServices().loginScribe(scribeEmail, scribePassword);
 
       if (auth.user == null) {
         throw Exception('Error logging in user');
@@ -87,7 +87,10 @@ class _LoginFormState extends State<LoginForm> {
           _passwordFormField(context, size),
           const SizedBox(height: SPACING * 1.5),
           _isLoading
-              ? const CircularProgressIndicator()
+              ? Center(
+                  child: CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ))
               : _loginButton(context),
         ],
       ),

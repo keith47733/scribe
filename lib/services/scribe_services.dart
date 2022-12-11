@@ -4,38 +4,38 @@ import 'package:flutter/material.dart';
 
 import '../models/scribe.dart';
 
-class UserServices {
-  final CollectionReference userRef =
-      FirebaseFirestore.instance.collection('users');
+class ScribeServices {
+  final CollectionReference scribeRef =
+      FirebaseFirestore.instance.collection('scribes');
 
-  Future<UserCredential> createUser(String email, String password) async {
+  Future<UserCredential> createScribe(String email, String password) async {
     return FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<UserCredential> loginUser(String email, String password) async {
+  Future<UserCredential> loginScribe(String email, String password) async {
     return FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<void> addUser(
+  Future<void> addScribe(
     BuildContext context,
-    String userId,
+    String scribeId,
     String displayName,
     String avatarUrl,
     String profession,
   ) async {
-    Scribe user = Scribe(
-      userId: userId,
+    Scribe scribe = Scribe(
+      scribeId: scribeId,
       displayName: displayName,
       avatarUrl: avatarUrl,
       profession: profession,
     );
-    await userRef.add(user.toMap());
+    await scribeRef.add(scribe.toMap());
     return;
   }
 }

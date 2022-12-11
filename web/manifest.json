@@ -1,6 +1,6 @@
 {
-    "name": "scribe",
-    "short_name": "scribe",
+    "name": "Grimoire",
+    "short_name": "Grimoire",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Parchment {
   final String? parchment;
-  final String? userId;
+  final String? scribeId;
   final String? author;
   final Timestamp? created;
   final String? photoUrls;
@@ -11,7 +11,7 @@ class Parchment {
 
   Parchment({
     required this.parchment,
-    required this.userId,
+    required this.scribeId,
     required this.author,
     required this.created,
     required this.photoUrls,
@@ -22,7 +22,7 @@ class Parchment {
   factory Parchment.fromDocument(QueryDocumentSnapshot parchmentData) {
     return Parchment(
       parchment: parchmentData.id,
-      userId: parchmentData.get('uid'),
+      scribeId: parchmentData.get('uid'),
       author: parchmentData.get('author'),
       created: parchmentData.get('created'),
       photoUrls: parchmentData.get('photo_urls'),
@@ -33,7 +33,7 @@ class Parchment {
 
   Map<String, dynamic> toMap() {
     return {
-      'uid': userId,
+      'uid': scribeId,
       'author': author,
       'created': created,
       'photo_urls': photoUrls,

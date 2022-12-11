@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../add_page_dialog.dart';
+import '../add_parchment_dialog.dart';
 import 'date_picker.dart';
 
 class HomeLeftPanel extends StatelessWidget {

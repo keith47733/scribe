@@ -47,7 +47,9 @@ class AddRightPanel extends StatelessWidget {
 
   Widget _doneButton(context) {
     return isLoading
-        ? const Center(child: CircularProgressIndicator())
+        ? CircularProgressIndicator(
+            color: Theme.of(context).colorScheme.inversePrimary,
+          )
         : ElevatedButton(
             onPressed: addParchmentFunction,
             style: ElevatedButton.styleFrom(

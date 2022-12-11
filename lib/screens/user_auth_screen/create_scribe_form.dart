@@ -2,20 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../../services/user_services.dart';
+import '../../services/scribe_services.dart';
 import '../home_screen.dart';
 import 'auth_input_decoration.dart';
 
-class CreateAccountForm extends StatefulWidget {
-  const CreateAccountForm({
+class CreateScribeForm extends StatefulWidget {
+  const CreateScribeForm({
     super.key,
   });
 
   @override
-  State<CreateAccountForm> createState() => _CreateAccountFormState();
+  State<CreateScribeForm> createState() => _CreateScribeFormState();
 }
 
-class _CreateAccountFormState extends State<CreateAccountForm> {
+class _CreateScribeFormState extends State<CreateScribeForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -43,24 +43,24 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       }
 
       UserCredential auth;
-      final userEmail = _emailController.text.trim();
-      final userPassword = _passwordController.text.trim();
+      final scribeEmail = _emailController.text.trim();
+      final scribePassword = _passwordController.text.trim();
 
-      auth = await UserServices().createUser(userEmail, userPassword);
+      auth = await ScribeServices().createScribe(scribeEmail, scribePassword);
 
       if (auth.user == null) {
         throw Exception('Created user is NULL');
       }
 
-      await UserServices().addUser(
+      await ScribeServices().addScribe(
         context,
         auth.user!.uid,
-        userEmail.split('@')[0],
+        scribeEmail.split('@')[0],
         'https://lh3.googleusercontent.com/a/AEdFTp6W3XMclYVKR47kNz55HeVd9VjUZFkGuYgU0Titfu8=s96-c',
         'Musician',
       );
 
-      auth = await UserServices().loginUser(userEmail, userPassword);
+      auth = await ScribeServices().loginScribe(scribeEmail, scribePassword);
 
       if (auth.user == null) {
         throw Exception('Login user is NULL');
@@ -96,7 +96,10 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
           _passwordFormField(context, size),
           const SizedBox(height: SPACING * 1.5),
           _isLoading
-              ? const CircularProgressIndicator()
+              ? Center(
+                  child: CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ))
               : _createAccountButton(context),
         ],
       ),
