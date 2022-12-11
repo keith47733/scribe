@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
+import '../../variables/constants.dart';
 import 'build_grimoire.dart';
 
 class HomeRightPanel extends StatelessWidget {

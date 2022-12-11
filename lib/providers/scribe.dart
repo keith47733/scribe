@@ -1,22 +1,30 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../providers/scribe.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ScribeServices {
+class Scribe with ChangeNotifier {
+  String? _uid;
+  String? _token;
+  DateTime? _expiryDate;
+  Timer? _authTimer;
+  String? _name;
+  String? _avatarUrl;
+
   final CollectionReference scribeRef =
       FirebaseFirestore.instance.collection('scribes');
 
-  Future<UserCredential> createScribe(String email, String password) async {
-    return FirebaseAuth.instance.createUserWithEmailAndPassword(
+  Future<UserCredential> loginScribe(String email, String password) async {
+    return FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<UserCredential> loginScribe(String email, String password) async {
-    return FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future<UserCredential> createScribe(String email, String password) async {
+    return FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );

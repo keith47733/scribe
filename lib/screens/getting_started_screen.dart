@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
+import '../variables/constants.dart';
 import 'scribe_auth_screen.dart';
 
 class GettingStartedScreen extends StatelessWidget {

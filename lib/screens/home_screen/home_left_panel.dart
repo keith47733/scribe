@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../../constants/constants.dart';
+import '../../variables/constants.dart';
+import '../../variables/global.dart';
 import '../add_parchment_dialog.dart';
 import 'date_picker.dart';
 
@@ -9,6 +11,7 @@ class HomeLeftPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('HOME LEFT PANEL: ${selectedDate.toString()}');
     final size = MediaQuery.of(context).size;
     return Expanded(
       flex: 1,
@@ -47,6 +50,7 @@ class HomeLeftPanel extends StatelessWidget {
                 context: context,
                 barrierDismissible: true,
                 builder: (context) {
+                  print('ADD PARCHMENT DIALOG: ${selectedDate.toString()}');
                   return const AddParchmentDialog();
                 },
               );

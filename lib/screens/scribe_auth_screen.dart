@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
+import '../variables/constants.dart';
 import 'user_auth_screen/create_scribe_form.dart';
 import 'user_auth_screen/login_scribe_form.dart';
 

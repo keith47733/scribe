@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
+import '../../variables/constants.dart';
 
 class AddLeftPanel extends StatelessWidget {
   const AddLeftPanel({super.key});

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Parchment {
-  final String? parchment;
+  final String? parchmentId;
   final String? scribeId;
   final String? author;
   final Timestamp? created;
@@ -10,7 +10,7 @@ class Parchment {
   final String? content;
 
   Parchment({
-    required this.parchment,
+    required this.parchmentId,
     required this.scribeId,
     required this.author,
     required this.created,
@@ -21,7 +21,7 @@ class Parchment {
 
   factory Parchment.fromDocument(QueryDocumentSnapshot parchmentData) {
     return Parchment(
-      parchment: parchmentData.id,
+      parchmentId: parchmentData.id,
       scribeId: parchmentData.get('uid'),
       author: parchmentData.get('author'),
       created: parchmentData.get('created'),

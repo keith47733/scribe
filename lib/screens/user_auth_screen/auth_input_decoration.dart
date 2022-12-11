@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
+import '../../variables/constants.dart';
 
 InputDecoration authInputDecoration(context, label, hint) {
   return InputDecoration(
     fillColor: Theme.of(context).colorScheme.surface,
-    floatingLabelBehavior: FloatingLabelBehavior.auto,
+    floatingLabelBehavior: FloatingLabelBehavior.always,
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(RADIUS * 2),
       borderSide: BorderSide(

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
-import '../../models/scribe.dart';
+import '../../variables/constants.dart';
+import '../../providers/scribe.dart';
 
 class ScribeAvatar extends StatefulWidget {
   const ScribeAvatar({super.key});
@@ -58,7 +58,7 @@ class _ScribeAvatarState extends State<ScribeAvatar> {
                     // const SizedBox(height: SPACING / 4),
                     _avatar(currScribe.avatarUrl),
                     // const SizedBox(height: SPACING / 8),
-                    _scribeName(currScribe.displayName),
+                    _scribeName(currScribe.name),
                     // const SizedBox(height: SPACING / 4),
                   ],
                 ),

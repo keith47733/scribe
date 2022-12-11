@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
+import '../../variables/constants.dart';
 import '../scribe_auth_screen.dart';
 import 'sort_switch.dart';
 import 'scribe_avatar.dart';

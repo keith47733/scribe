@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grimoire/utils/utils.dart';
 
-import '../../constants/constants.dart';
+import '../../variables/constants.dart';
+import '../../variables/global.dart';
 import 'parchment_input_decoration.dart';
 
 class AddCenterPanel extends StatefulWidget {
@@ -40,7 +42,8 @@ class _AddCenterPanelState extends State<AddCenterPanel> {
 
   Widget _date(context) {
     return Text(
-      'December 10, 2022',
+      formatDateFromDateTime(selectedDate),
+      // selectedDate.toString(),
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSurface,
           ),
