@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Grimoire {
-  final String? pageId;
+class Parchment {
+  final String? parchment;
   final String? userId;
   final String? author;
   final Timestamp? created;
@@ -9,8 +9,8 @@ class Grimoire {
   final String? title;
   final String? content;
 
-  Grimoire({
-    required this.pageId,
+  Parchment({
+    required this.parchment,
     required this.userId,
     required this.author,
     required this.created,
@@ -19,15 +19,15 @@ class Grimoire {
     required this.content,
   });
 
-  factory Grimoire.fromDocument(QueryDocumentSnapshot pageData) {
-    return Grimoire(
-      pageId: pageData.id,
-      userId: pageData.get('uid'),
-      author: pageData.get('author'),
-      created: pageData.get('created'),
-      photoUrls: pageData.get('photo_urls'),
-      title: pageData.get('title'),
-      content: pageData.get('content'),
+  factory Parchment.fromDocument(QueryDocumentSnapshot parchmentData) {
+    return Parchment(
+      parchment: parchmentData.id,
+      userId: parchmentData.get('uid'),
+      author: parchmentData.get('author'),
+      created: parchmentData.get('created'),
+      photoUrls: parchmentData.get('photo_urls'),
+      title: parchmentData.get('title'),
+      content: parchmentData.get('content'),
     );
   }
 

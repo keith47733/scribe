@@ -24,7 +24,7 @@ class _SortSwitchState extends State<SortSwitch> {
   Widget _earliest() {
     return Text(
       'Earliest',
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+      style: Theme.of(context).textTheme.bodySmall!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
           ),
     );
@@ -46,7 +46,7 @@ class _SortSwitchState extends State<SortSwitch> {
   Widget _latest() {
     return Text(
       'Latest',
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+      style: Theme.of(context).textTheme.bodySmall!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
           ),
     );

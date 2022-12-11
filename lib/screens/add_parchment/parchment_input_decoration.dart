@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InputDecoration pageInputDecoration(context, hint) {
+InputDecoration parchmentInputDecoration(context, hint) {
   return InputDecoration(
     fillColor: Theme.of(context).colorScheme.surface,
     hintText: hint,

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../../services/services.dart';
-import '../home_screen/home_screen.dart';
+import '../../services/user_services.dart';
+import '../home_screen.dart';
 import 'auth_input_decoration.dart';
 
 class CreateAccountForm extends StatefulWidget {
@@ -46,13 +46,13 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       final userEmail = _emailController.text.trim();
       final userPassword = _passwordController.text.trim();
 
-      auth = await Services().createUser(userEmail, userPassword);
+      auth = await UserServices().createUser(userEmail, userPassword);
 
       if (auth.user == null) {
         throw Exception('Created user is NULL');
       }
 
-      await Services().createMUser(
+      await UserServices().addUser(
         context,
         auth.user!.uid,
         userEmail.split('@')[0],
@@ -60,7 +60,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
         'Musician',
       );
 
-      auth = await Services().loginUser(userEmail, userPassword);
+      auth = await UserServices().loginUser(userEmail, userPassword);
 
       if (auth.user == null) {
         throw Exception('Login user is NULL');

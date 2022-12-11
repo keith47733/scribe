@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
-import 'create_account_form.dart';
-import 'login_form.dart';
+import '../constants/constants.dart';
+import 'user_auth_screen/create_account_form.dart';
+import 'user_auth_screen/login_form.dart';
 
 class UserAuthScreen extends StatefulWidget {
   const UserAuthScreen({super.key});

@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/constants.dart';
-import 'screens/getting_started_screen/getting_started_screen.dart';
-import 'screens/user_auth_screen/user_auth_screen.dart';
+import 'screens/user_auth_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
-      title: 'Scribe',
+      title: 'scribe',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -38,7 +37,7 @@ class GetInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('pages').snapshots(),
+        stream: FirebaseFirestore.instance.collection('parchments').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Text('SOMETHING WENT WRONG');

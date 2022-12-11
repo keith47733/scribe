@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../user_auth_screen/user_auth_screen.dart';
+import '../user_auth_screen.dart';
 import 'sort_switch.dart';
 import 'user_avatar.dart';
 

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../../services/services.dart';
-import '../home_screen/home_screen.dart';
+import '../../services/user_services.dart';
+import '../home_screen.dart';
 import 'auth_input_decoration.dart';
 
 class LoginForm extends StatefulWidget {
@@ -53,7 +53,7 @@ class _LoginFormState extends State<LoginForm> {
       final userEmail = _emailController.text.trim();
       final userPassword = _passwordController.text.trim();
 
-      auth = await Services().loginUser(userEmail, userPassword);
+      auth = await UserServices().loginUser(userEmail, userPassword);
 
       if (auth.user == null) {
         throw Exception('Error logging in user');

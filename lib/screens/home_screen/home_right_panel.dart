@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import 'pages.dart';
+import 'build_grimoire.dart';
 
-class RightPanel extends StatelessWidget {
-  const RightPanel({super.key});
+class HomeRightPanel extends StatelessWidget {
+  const HomeRightPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class RightPanel extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: const [
-            Pages(),
+            BuildGrimoire(),
           ],
         ),
       ),

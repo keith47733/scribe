@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
-import '../user_auth_screen/user_auth_screen.dart';
+import '../constants/constants.dart';
+import 'user_auth_screen.dart';
 
 class GettingStartedScreen extends StatelessWidget {
   const GettingStartedScreen({super.key});

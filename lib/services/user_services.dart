@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/scribe.dart';
 
-class Services {
+class UserServices {
   final CollectionReference userRef =
       FirebaseFirestore.instance.collection('users');
 
@@ -22,7 +22,7 @@ class Services {
     );
   }
 
-  Future<void> createMUser(
+  Future<void> addUser(
     BuildContext context,
     String userId,
     String displayName,

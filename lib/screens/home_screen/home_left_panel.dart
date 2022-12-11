@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../add_page/add_page_dialog.dart';
+import '../add_page_dialog.dart';
 import 'date_picker.dart';
 
-class LeftPanel extends StatelessWidget {
-  const LeftPanel({super.key});
+class HomeLeftPanel extends StatelessWidget {
+  const HomeLeftPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class LeftPanel extends StatelessWidget {
                 context: context,
                 barrierDismissible: true,
                 builder: (context) {
-                  return const AddPageDialog();
+                  return const AddParchmentDialog();
                 },
               );
             },
@@ -57,7 +57,7 @@ class LeftPanel extends StatelessWidget {
             ),
             label: FittedBox(
               child: Text(
-                'New Page',
+                'New Parchment',
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
                     ),
