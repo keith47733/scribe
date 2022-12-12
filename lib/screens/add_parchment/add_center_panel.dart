@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:grimoire/utils/utils.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/grimoire.dart';
+import '../../utils/utils.dart';
 import '../../variables/constants.dart';
-import '../../variables/global.dart';
 import 'parchment_input_decoration.dart';
 
 class AddCenterPanel extends StatefulWidget {
@@ -42,8 +43,8 @@ class _AddCenterPanelState extends State<AddCenterPanel> {
 
   Widget _date(context) {
     return Text(
-      formatDateFromDateTime(selectedDate),
-      // selectedDate.toString(),
+      formatDateFromDateTime(
+          Provider.of<Grimoire>(context, listen: false).selectedDate!),
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Theme.of(context).colorScheme.onSurface,
           ),
@@ -99,7 +100,6 @@ class _AddCenterPanelState extends State<AddCenterPanel> {
     return TextFormField(
       controller: widget.contentController,
       maxLines: null,
-      // scrollPhysics: ,
       decoration: parchmentInputDecoration(
         context,
         'Start scribing...',

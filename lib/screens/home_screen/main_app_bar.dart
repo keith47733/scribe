@@ -1,10 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/grimoire.dart';
+import '../../providers/scribe.dart';
 import '../../variables/constants.dart';
 import '../scribe_auth_screen.dart';
-import 'sort_switch.dart';
 import 'scribe_avatar.dart';
+import 'sort_switch.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({super.key});
@@ -14,7 +16,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void _logout(context) async {
     try {
-      await FirebaseAuth.instance.signOut();
+      await Provider.of<Scribe>(context, listen: false).logout();
+
+      Provider.of<Grimoire>(context, listen: false).resetSortParameters();
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (ctx) => const ScribeAuthScreen(),
@@ -22,7 +27,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     } catch (error) {
       print('LOGOUT ERROR: ${error.toString()}');
-      return;
     }
   }
 
@@ -59,8 +63,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget _logo(context) {
     return SizedBox(
-      height: APP_BAR_HEIGHT * 0.85,
-      width: APP_BAR_HEIGHT * 0.85,
+      height: APP_BAR_HEIGHT * 0.75,
+      width: APP_BAR_HEIGHT * 0.75,
       child: Image.asset(
         'assets/images/grimoire.png',
         color: Theme.of(context).colorScheme.onPrimary,
@@ -72,7 +76,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget _title(context) {
     return Text(
       'Grimoire',
-      style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
             color: Theme.of(context).colorScheme.onPrimary,
           ),
     );

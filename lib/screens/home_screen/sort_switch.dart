@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/grimoire.dart';
 
 class SortSwitch extends StatefulWidget {
   const SortSwitch({super.key});
@@ -8,7 +11,7 @@ class SortSwitch extends StatefulWidget {
 }
 
 class _SortSwitchState extends State<SortSwitch> {
-  bool isLatest = true;
+  bool? sortLatest;
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +34,22 @@ class _SortSwitchState extends State<SortSwitch> {
   }
 
   Widget _switch() {
-    return Switch(
-      activeColor: Theme.of(context).colorScheme.tertiaryContainer,
-      inactiveThumbColor: Theme.of(context).colorScheme.tertiaryContainer,
-      value: isLatest,
-      onChanged: (value) {
-        setState(() {
-          isLatest = value;
-        });
+    return Consumer<Grimoire>(
+      builder: (context, grimoire, _) {
+        grimoire.sortLatest == null
+            ? sortLatest = true
+            : sortLatest = grimoire.sortLatest!;
+        return Switch(
+          activeColor: Theme.of(context).colorScheme.tertiaryContainer,
+          inactiveThumbColor: Theme.of(context).colorScheme.tertiaryContainer,
+          value: sortLatest!,
+          onChanged: (value) {
+            setState(() {
+              sortLatest = value;
+              grimoire.sortLatest = value;
+            });
+          },
+        );
       },
     );
   }

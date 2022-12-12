@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../variables/constants.dart';
 
-InputDecoration authInputDecoration(context, label, hint) {
+InputDecoration scribeInputDecoration(context, label, hint) {
   return InputDecoration(
     fillColor: Theme.of(context).colorScheme.surface,
     floatingLabelBehavior: FloatingLabelBehavior.always,

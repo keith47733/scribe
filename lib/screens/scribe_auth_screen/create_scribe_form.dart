@@ -1,10 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/scribe.dart';
 import '../../variables/constants.dart';
-import '../../services/scribe_services.dart';
 import '../home_screen.dart';
-import 'auth_input_decoration.dart';
+import 'scribe_input_decoration.dart';
 
 class CreateScribeForm extends StatefulWidget {
   const CreateScribeForm({
@@ -29,41 +29,25 @@ class _CreateScribeFormState extends State<CreateScribeForm> {
     _passwordController.dispose();
   }
 
-  void _createAccount(context) async {
+  void _createScribe(context) async {
     try {
       setState(() {
         _isLoading = true;
       });
-      await Future.delayed(const Duration(seconds: 2));
+
+      final String email = _emailController.text.trim();
+      final String password = _passwordController.text.trim();
 
       final isValid = _formKey.currentState!.validate();
-
       if (!isValid) {
         throw Exception('Form not validated');
       }
 
-      UserCredential auth;
-      final scribeEmail = _emailController.text.trim();
-      final scribePassword = _passwordController.text.trim();
+      final bool isCreate = await Provider.of<Scribe>(context, listen: false)
+          .createScribe(email, password);
 
-      auth = await ScribeServices().createScribe(scribeEmail, scribePassword);
-
-      if (auth.user == null) {
-        throw Exception('Created user is NULL');
-      }
-
-      await ScribeServices().addScribe(
-        context,
-        auth.user!.uid,
-        scribeEmail.split('@')[0],
-        'https://lh3.googleusercontent.com/a/AEdFTp6W3XMclYVKR47kNz55HeVd9VjUZFkGuYgU0Titfu8=s96-c',
-        'Musician',
-      );
-
-      auth = await ScribeServices().loginScribe(scribeEmail, scribePassword);
-
-      if (auth.user == null) {
-        throw Exception('Login user is NULL');
+      if (!isCreate) {
+        throw Exception('isCreate is FALSE');
       }
 
       Navigator.of(context).pushReplacement(
@@ -100,7 +84,7 @@ class _CreateScribeFormState extends State<CreateScribeForm> {
                   child: CircularProgressIndicator(
                   color: Theme.of(context).colorScheme.inversePrimary,
                 ))
-              : _createAccountButton(context),
+              : _createScribeButton(context),
         ],
       ),
     );
@@ -134,7 +118,7 @@ class _CreateScribeFormState extends State<CreateScribeForm> {
                 color: Theme.of(context).colorScheme.onSurface,
               ),
           decoration:
-              authInputDecoration(context, 'Email', 'johndoe@gmail.com'),
+              scribeInputDecoration(context, 'Email', 'johndoe@gmail.com'),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter your email address.';
@@ -153,8 +137,8 @@ class _CreateScribeFormState extends State<CreateScribeForm> {
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
-        decoration:
-            authInputDecoration(context, 'Password', 'Enter a secure password'),
+        decoration: scribeInputDecoration(
+            context, 'Password', 'Enter a secure password'),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter a password.';
@@ -165,9 +149,9 @@ class _CreateScribeFormState extends State<CreateScribeForm> {
     );
   }
 
-  Widget _createAccountButton(context) {
+  Widget _createScribeButton(context) {
     return ElevatedButton(
-      onPressed: () => _createAccount(context),
+      onPressed: () => _createScribe(context),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(SPACING),
         backgroundColor: Theme.of(context).colorScheme.primary,

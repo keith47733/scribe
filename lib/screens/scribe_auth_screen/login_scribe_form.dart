@@ -1,10 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/scribe.dart';
 import '../../variables/constants.dart';
-import '../../services/scribe_services.dart';
 import '../home_screen.dart';
-import 'auth_input_decoration.dart';
+import 'scribe_input_decoration.dart';
 
 class LoginScribeForm extends StatefulWidget {
   const LoginScribeForm({
@@ -41,22 +41,19 @@ class _LoginScribeFormState extends State<LoginScribeForm> {
       setState(() {
         _isLoading = true;
       });
-      // await Future.delayed(const Duration(seconds: 2));
+
+      final String email = _emailController.text.trim();
+      final String password = _passwordController.text.trim();
 
       final isValid = _formKey.currentState!.validate();
-
       if (!isValid) {
         throw Exception('Form not validated');
       }
 
-      UserCredential auth;
-      final scribeEmail = _emailController.text.trim();
-      final scribePassword = _passwordController.text.trim();
-
-      auth = await ScribeServices().loginScribe(scribeEmail, scribePassword);
-
-      if (auth.user == null) {
-        throw Exception('Error logging in user');
+      final bool isLogin = await Provider.of<Scribe>(context, listen: false)
+          .login(email, password);
+      if (!isLogin) {
+        throw Exception('Login error');
       }
 
       Navigator.of(context).pushReplacement(
@@ -65,10 +62,10 @@ class _LoginScribeFormState extends State<LoginScribeForm> {
         ),
       );
     } catch (error) {
+      print('LOGIN ERROR: ${error.toString()}');
       setState(() {
         _isLoading = false;
       });
-      print('LOGIN ERROR: ${error.toString()}');
     }
   }
 
@@ -98,12 +95,11 @@ class _LoginScribeFormState extends State<LoginScribeForm> {
   }
 
   Widget _title(context) {
-    return Text(
-      'Sign In',
-      style: Theme.of(context).textTheme.displaySmall!.copyWith(
-            color: Theme.of(context).colorScheme.primary,
-          ),
-    );
+    return Text('Sign In',
+        style: Theme.of(context)
+            .textTheme
+            .displaySmall!
+            .copyWith(color: Theme.of(context).colorScheme.primary));
   }
 
   Widget _emailFormField(context, size) {
@@ -116,7 +112,7 @@ class _LoginScribeFormState extends State<LoginScribeForm> {
                 color: Theme.of(context).colorScheme.onSurface,
               ),
           decoration:
-              authInputDecoration(context, 'Email', 'johndoe@gmail.com'),
+              scribeInputDecoration(context, 'Email', 'johndoe@gmail.com'),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter your email address.';
@@ -135,8 +131,8 @@ class _LoginScribeFormState extends State<LoginScribeForm> {
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
-        decoration:
-            authInputDecoration(context, 'Password', 'Enter a secure password'),
+        decoration: scribeInputDecoration(
+            context, 'Password', 'Enter a secure password'),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter a password.';
@@ -154,12 +150,11 @@ class _LoginScribeFormState extends State<LoginScribeForm> {
         padding: const EdgeInsets.all(SPACING),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      child: Text(
-        'Login',
-        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-      ),
+      child: Text('Login',
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge!
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary)),
     );
   }
 }

@@ -1,0 +1,5 @@
+Move add parchment logic into Grimoire class
+Figure how to set time of DateTime to 00:00 AM
+Add filter by date logic to Parchment stream
+Add firebase info for Android app
+Try building Android APK and installing on Chromebook

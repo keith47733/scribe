@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../variables/constants.dart';
-import 'user_auth_screen/create_scribe_form.dart';
-import 'user_auth_screen/login_scribe_form.dart';
+import 'scribe_auth_screen/create_scribe_form.dart';
+import 'scribe_auth_screen/login_scribe_form.dart';
 
 class ScribeAuthScreen extends StatefulWidget {
   const ScribeAuthScreen({super.key});
@@ -13,7 +13,7 @@ class ScribeAuthScreen extends StatefulWidget {
 }
 
 class _ScribeAuthScreenState extends State<ScribeAuthScreen> {
-  bool _isLogin = true;
+  bool _isLoginForm = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _ScribeAuthScreenState extends State<ScribeAuthScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _header(context),
-          _isLogin ? const LoginScribeForm() : const CreateScribeForm(),
+          _isLoginForm ? const LoginScribeForm() : const CreateScribeForm(),
           const SizedBox(height: SPACING),
           _formTextButton(context),
           const SizedBox(height: SPACING),
@@ -48,7 +48,7 @@ class _ScribeAuthScreenState extends State<ScribeAuthScreen> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: _isLogin
+              text: _isLoginForm
                   ? 'Don\'t have an account?'
                   : 'Already have an account?',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -57,7 +57,7 @@ class _ScribeAuthScreenState extends State<ScribeAuthScreen> {
             ),
             const TextSpan(text: '  '),
             TextSpan(
-              text: _isLogin ? 'Create Account' : 'Login',
+              text: _isLoginForm ? 'Create Account' : 'Login',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class _ScribeAuthScreenState extends State<ScribeAuthScreen> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   setState(() {
-                    _isLogin = !_isLogin;
+                    _isLoginForm = !_isLoginForm;
                   });
                 },
             ),

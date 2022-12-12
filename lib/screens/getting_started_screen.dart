@@ -29,7 +29,6 @@ class GettingStartedScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _title(context),
-                // const SizedBox(height: SPACING / 2),
                 _tagLine(context),
                 const SizedBox(height: SPACING),
                 _titleImage(context, size),
@@ -78,12 +77,11 @@ class GettingStartedScreen extends StatelessWidget {
         padding: const EdgeInsets.all(SPACING),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      child: Text(
-        'Get Started!',
-        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-      ),
+      child: Text('Get Started!',
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge!
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary)),
     );
   }
 }

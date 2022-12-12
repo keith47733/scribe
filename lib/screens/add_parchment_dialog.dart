@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grimoire/variables/global.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/grimoire.dart';
+import '../providers/scribe.dart';
 import '../variables/constants.dart';
 import '../providers/parchment.dart';
 import 'add_parchment/add_center_panel.dart';
@@ -23,7 +25,8 @@ class _AddParchmentDialogState extends State<AddParchmentDialog> {
 
   bool _isLoading = false;
 
-  Future<void> addParchment() async {
+  Future<void> addParchment(context) async {
+    // MOVE THIS INTO GRIMOIRE METHOD
     try {
       setState(() {
         _isLoading = true;
@@ -45,10 +48,10 @@ class _AddParchmentDialogState extends State<AddParchmentDialog> {
 
       await FirebaseFirestore.instance.collection('parchments').add(
             Parchment(
-              parchmentId: '',
-              scribeId: FirebaseAuth.instance.currentUser!.uid,
+              scribeId: Provider.of<Scribe>(context, listen: false).uid,
               author: author,
-              created: Timestamp.fromDate(selectedDate),
+              created: Timestamp.fromDate(
+                  Provider.of<Grimoire>(context, listen: false).selectedDate!),
               photoUrls: 'photo url',
               title: _titleController.text.trim(),
               content: _contentController.text.trim(),
@@ -84,7 +87,7 @@ class _AddParchmentDialogState extends State<AddParchmentDialog> {
               contentController: _contentController,
             ),
             AddRightPanel(
-              addParchmentFunction: addParchment,
+              addParchmentFunction: () => addParchment(context),
               isLoading: _isLoading,
             ),
           ],
